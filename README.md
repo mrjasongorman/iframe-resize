@@ -1,10 +1,18 @@
 # iframe-resize
 Automatically resize iframe height based on it's content
 
+This project came about due to many clients having CMSs in strict environments and many different software stacks. It gives the ability to create marketing pages and widgets that feel completely seamless to the main site, but in reality is a dynamically adjusting iframe to a completely different and (most of the time) simpler stack.
 
-Include **iframe.js** to the iframes content
+A big concern was SEO as the iframe content is (most likely) on a different origin, but as far as i understand so long as the iframe content has a canonical tag pointing to the page it's embedded within, then search engines understand the context. A similar situation to AMP cached pages.
 
-You can also add this code into the page within the iframe to detect whether it's inside and iframe and adjust it's <a> links to target="_top". This will allow the links within the iframe to navigate the parent / top page to another location rather than just within the iframe.
+The ability to create widgets and landing pages without concern as to what software a companies main site is on, or having to worry about someone elses JS or CSS coming along and clobbering your thing weeks or months after deployment is really nice. And the little autodetect feature **below** which detects the context and adjust it's href links is also a nice added touch. Saves the need to add target="_top" tags into links manually.
+
+The additional load step of the iframe is also a concern, but chances are, so long as the iframe content is on a static CDN, it will load faster than the initial time for the main site to load, so the added iframe load time isn't such a burden.
+
+
+To get started include **iframe.js** to the iframes content.
+
+You can also add the code below into the page within the iframe to detect whether it's inside an iframe and adjust it's <a> links to target="_top". This will allow the links within the iframe to navigate the parent / top page to another location rather than just within the iframe.
 
 ```javascript
 ( function(){
