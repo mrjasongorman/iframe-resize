@@ -11,7 +11,7 @@ If the content of an iframe has the same aspect ratio, then resizing can be hand
 
 ### e.g parent page
 ```html
-<iframe style="width:100%;height:100px" sandbox="allow-scripts" src="example.com"></iframe>
+<iframe style="width:100%;height:100px;border:none;" frameBorder="0" sandbox="allow-scripts" src="example.com"></iframe>
 ```
 
 
