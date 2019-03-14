@@ -1,18 +1,25 @@
 # iframe-resize
 Automatically resize iframe height based on it's content
 
-This project came about due to many clients having CMSs in strict environments and many different software stacks. It gives the ability to create marketing pages and widgets that feel completely seamless to the main site, but in reality is a dynamically adjusting iframe to a completely different and (most of the time) simpler stack.
+If the content of an iframe has the same aspect ratio, then resizing can be handled purely with CSS on the host. However if the content within an iframe changes it's aspect ratio, then clipping will occur on the vertical axis. The horizontal axis is usually ok as the content with an iframe treats the iframe like a browser window. But on with embedded content we don't want it to scroll independantly of the host page.
 
-A big concern was SEO as the iframe content is (most likely) on a different origin, but as far as i understand so long as the iframe content has a canonical tag pointing to the page it's embedded within, then search engines understand the context. A similar situation to AMP cached pages.
+1. Add an `<iframe>` to your website poiting to some content.
 
-The ability to create widgets and landing pages without concern as to what software a companies main site is on, or having to worry about someone elses JS or CSS coming along and clobbering your thing weeks or months after deployment is really nice. And the little autodetect feature **below** which detects the context and adjust it's href links is also a nice added touch. Saves the need to add target="_top" tags into links manually.
+2. Add **iframe.js** code to the content within your iframe.
 
-The additional load step of the iframe is also a concern, but chances are, so long as the iframe content is on a static CDN, it will load faster than the initial time for the main site to load, so the added iframe load time isn't such a burden.
+3. Add **parent.js** code to your host site.
+
+### e.g parent page
+```html
+<iframe style="width:100%;height:100px" sandbox="allow-scripts" src="example.com"></iframe>
+```
 
 
-To get started include **iframe.js** to the iframes content.
 
+### bonus
 You can also add the code below into the page within the iframe to detect whether it's inside an iframe and adjust it's <a> links to target="_top". This will allow the links within the iframe to navigate the parent / top page to another location rather than just within the iframe.
+
+To enable this though you will need to add `allow-top-navigation` to your iframes sandbox attribute.
 
 ```javascript
 ( function(){
@@ -22,22 +29,4 @@ You can also add the code below into the page within the iframe to detect whethe
     });
   }
 })();
-```
-
-
-Include **iframe-embed.js** to the parent page using the iframe.
-
-This iframe embed code gets a list of all iframes on a page, and listens for postMessage events.
-
-It will then take a postMessage event and match it to the specific iframe that sent the message. This doesn't use origin but the source object itself so you could in theory have two iframes embedding the same content, and them both adjust independently of each other.
-
-Only if it finds a matching iframe does it parse the JSON object, checking the value of height is of type Number and then finlally adjusts the iframes height. I felt this was a good way of ensuring nothing malicous gets passed through the postMessage up to the parent page.
-
-You could in theory adjust this embed code, send and apply more CSS properties like width but height is the main problem with iframed content.
-
-This code also works with sandbox applied to the iframe so long as allow-scripts is passed in. I've also added allow-top-navigation so links within the iframe can switch the entire page rather than just within the iframe, making the content feel seamless.
-
-### e.g
-```html
-<iframe sandbox="allow-scripts allow-top-navigation" src="example.com"></iframe>
 ```

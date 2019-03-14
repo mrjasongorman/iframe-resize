@@ -11,14 +11,13 @@
   // Loop through list and match the postMessage source object to the iframe object,
   // if so parse data, check for int of new height and adjust the target iframes height accordingly.
   function resizeIframe(e){
-    for(var i = 0; i < iframes.length; i++){
-      if( iframes[i].contentWindow === e.source ){
+    iframes.forEach(item => {
+      if( item.contentWindow === e.source ){
         incomingData = JSON.parse(e.data);
         if( !isNaN(incomingData.height) ){
-          return iframes[i].style.height = (incomingData.height + 'px');
+          item.style.height = (incomingData.height + 'px');
         }
       }
-    }
+    });
   }
-
 })();

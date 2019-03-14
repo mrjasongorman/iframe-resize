@@ -1,16 +1,18 @@
-( function(){
+(function(){
   var theBody = document.getElementsByTagName('body')[0];
-  var currentHeight = theBody.offsetHeight;
-  var sendPostMessageUpdate = function(){
+  var currentContentHeight = theBody.offsetHeight;
+  function sendPostMessageUpdate(){
     parent.postMessage( JSON.stringify( { height: (theBody.offsetHeight + 1) } ), "*" );
-    currentHeight = theBody.offsetHeight;
+    currentContentHeight = theBody.offsetHeight;
   }
-  setInterval( function(){
+  function update(){
     // If the content height has changed, send a postMessage
-    if( currentHeight !== theBody.offsetHeight ){
+    if( currentContentHeight !== theBody.offsetHeight ){
       sendPostMessageUpdate();
     }
-  }, 100);
+    requestAnimationFrame(update);
+  }
   // Initial resize postMessage
   sendPostMessageUpdate();
+  update();
 })();
