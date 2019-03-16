@@ -1,5 +1,5 @@
 # iframe-resize
-Automatically resize iframe height based on it's content
+Automatically add and resize iframe height based on it's content
 
 If the content of an iframe has the same aspect ratio, then resizing can be handled purely with CSS on the host. However if the content within an iframe changes it's aspect ratio, then clipping will occur on the vertical axis. The horizontal axis is usually ok as the content with an iframe treats the iframe like a browser window. But on with embedded content we don't want it to scroll independantly of the host page.
 
@@ -11,7 +11,7 @@ If the content of an iframe has the same aspect ratio, then resizing can be hand
 
 ### e.g parent page
 ```html
-<iframe style="width:100%;height:100px;border:none;" frameBorder="0" sandbox="allow-scripts" src="example.com"></iframe>
+<iframe style="width:100%;height:100px;border:none;" frameborder="0" sandbox="allow-scripts" src="example.com"></iframe>
 ```
 
 

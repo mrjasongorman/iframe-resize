@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>A widget</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    *,*:before,*:after{
+      box-sizing: border-box;
+    }
+    html, body{ padding:0; margin: 0; }
+    section{ display: block; width: 100%; }
+    h1{ display: block; margin: 0;}
+    img{ width: auto; max-width: 100%;}
+  </style>
+</head>
+<body>
+  <section>
+    <h1>This is a widget</h1>
+    <img id="pic" src="https://detechter.com/wp-content/uploads/2013/08/cute-samoyed-dogs.jpg">
+    <button onClick="changePic()">Change pic</button>
+  </section>
+<script>
+var image1 = "https://detechter.com/wp-content/uploads/2013/08/cute-samoyed-dogs.jpg";
+var image2 = "http://static.boredpanda.com/blog/wp-content/uploads/2015/06/expressive-dog-portraits-elke-vogelsang-6.jpg";
+function changePic(){
+  currentPic = document.getElementById('pic')
+  currentPic.src = (currentPic.src === image1) ? image2 : image1;
+  return 1;
+}
+(function(){
+  var theBody = document.getElementsByTagName('body')[0];
+  var currentContentHeight = theBody.offsetHeight;
+  function sendPostMessageUpdate(){
+    parent.postMessage( JSON.stringify( { height: (theBody.offsetHeight + 1) } ), "*" );
+    currentContentHeight = theBody.offsetHeight;
+  }
+  function update(){
+    // call this function again for the next frame
+    requestAnimationFrame(update);
+    // If the content height has changed, send a postMessage
+    if( currentContentHeight !== theBody.offsetHeight ){
+      sendPostMessageUpdate();
+    }
+  }
+  // Initial resize postMessage
+  sendPostMessageUpdate();
+  update();
+})();
+</script>
+</body>
+</html>
