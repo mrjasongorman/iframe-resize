@@ -17,7 +17,7 @@ If the content of an iframe has the same aspect ratio, then resizing can be hand
 
 
 ### bonus
-You can also add the code below into the page within the iframe to detect whether it's inside an iframe and adjust it's <a> links to target="_top". This will allow the links within the iframe to navigate the parent / top page to another location rather than just within the iframe.
+You can also add the code below into the page within the iframe to detect whether it's embedded and adjust it's <a> links to target="_top". This will allow the links within the iframe to navigate the parent / top page to another location rather than just within the iframe.
 
 To enable this though you will need to add `allow-top-navigation` to your iframes sandbox attribute.
 
