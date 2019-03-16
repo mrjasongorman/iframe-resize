@@ -23,7 +23,6 @@ var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
   // Loop through list and match the postMessage source object to the iframe object,
   // if so parse data, check for int of new height and adjust the target iframes height accordingly.
   function resizeIframe(e){
-    console.log(e.data);
     iframes.forEach(item => {
       if( item.contentWindow === e.source ){
         incomingData = JSON.parse(e.data);
