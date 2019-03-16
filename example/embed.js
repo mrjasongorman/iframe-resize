@@ -17,7 +17,6 @@ var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
   var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
   // Get a list of all iframes on the page
   var iframes = Array.from(document.getElementsByTagName('iframe'));
-  console.log(iframes);
   // Listen for postMessage events
   eventer(messageEvent, resizeIframe, false);
   
